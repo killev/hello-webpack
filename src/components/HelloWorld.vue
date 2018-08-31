@@ -36,3 +36,14 @@ export default{
 }
 </script>
 
+<style>
+#test {
+    width: 500px;
+    height: 500px;
+}
+#ul{
+  list-style-type: none;
+  display: inline-block;
+}
+</style>
+
