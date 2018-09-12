@@ -1,17 +1,23 @@
 <template>
   <div>
-  <img :src="items[image].image" id="test">
-  <img :src="items2[image2].image" id="test2">
-  <ul id="ul">
-  <li v-for="(item, key) in items" id="li">
-    <span @click="image = key"><img :src="item.image"/></span>
-  </li>
-  </ul>
-  <ul id="ul2">
-  <li v-for="(item, key) in items2" id="li2">
-    <span @click="image2 = key"><img :src="item.image"/></span>
-  </li>
-  </ul>
+    <img :src="items[image].image" class="first-image">
+    <img :src="items2[image2].image" class="second-image">
+    <img :src="items3[image3].image" class="third-image">
+    <ul class="first-image-list">
+      <li v-for="(item, key) in items" class="first-list-elements">
+        <span @click="image = key"><img :src="item.image"/></span>
+      </li>
+    </ul>
+    <ul class="second-image-list">
+      <li v-for="(item, key) in items2" class="second-list-elements">
+        <span @click="image2 = key"><img :src="item.image"/></span>
+      </li>
+    </ul>
+    <ul class="third-image-list">
+      <li v-for="(item, key) in items3" class="third-list-elements">
+        <span @click="image3 = key"><img :src="item.image"/></span>
+      </li>
+    </ul>
 </div>    
 </template>
   
@@ -21,7 +27,7 @@ export default {
   name: 'app',
   data: function() { 
     let initImg = "bla1"
-    if (this.$router.currentRoute.query.image != undefined) {
+      if (this.$router.currentRoute.query.image != undefined) {
        initImg = this.$router.currentRoute.query.image 
     }
 
@@ -29,6 +35,12 @@ export default {
       if (this.$router.currentRoute.query.image2 != undefined) {
        initImg2 = this.$router.currentRoute.query.image2 
     }
+
+    let initImg3 = "bla9"
+      if (this.$router.currentRoute.query.image3 != undefined) {
+       initImg3 = this.$router.currentRoute.query.image3 
+    }
+
 
     return {
       image: initImg,
@@ -45,45 +57,65 @@ export default {
         "bla7": { image: require('@/assets/Zorya.png') },
         "bla8": { image: require('@/assets/Olexa.jpg'), },
       },
+      image3: initImg3,
+      items3: {
+        "bla9": { image: require('@/assets/Olimpic.png') },
+        "bla10": { image: require('@/assets/Chorno.jpg') },
+        "bla11": { image: require('@/assets/Desna.jpg') },
+        "bla12": { image: require('@/assets/Arsenal.png') },
+      }
     }
   }, 
   computed: {
     combined: function(){
-      return { image: this.image, image2: this.image2 }
+      return { image: this.image, image2: this.image2, image3: this.image3 }
     }
   },
   watch: {
     combined: function(val){
-      this.$router.push({ query: { image: val.image, image2: val.image2 }})
+      this.$router.push({ query: { image: val.image, image2: val.image2, image3: val.image3 }})
     }
   }
 }
 </script>
 
 <style>
-#test {
+.first-image {
     width: 500px;
     height: 500px;
     opacity: 0.2;
 }
-#test2 {
+.second-image {
     width: 500px;
     height: 500px;
     opacity: 0.2;  
     margin-left: 300px;
 }
-#ul{
+.third-image {
+    width: 500px;
+    height: 500px;
+    opacity: 0.2;
+}
+.first-image-list{
   list-style-type: none;
 }
-#li {
+.first-list-elements {
   display: inline;
   margin-left: 10px;
 }
-#ul2 {
+.second-image-list {
     list-style-type: none;
 }
-#li2 {
-  float: right;
+.second-list-elements {
+  display: inline;
+  margin-left: 10px;
+}
+.third-image-list{
+  list-style-type: none;
+}
+.third-list-elements {
+  margin-left: 10px;
+  display: inline;
 }
 </style>
 
